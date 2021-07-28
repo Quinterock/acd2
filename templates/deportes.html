@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            {% block title %}
+                - Deportes
+            {% endblock %}    
+        </title>
+    </head>
+
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+
+    <body>
+        {% block content %}
+
+            {% if form %}
+                <form action="" method="post">
+                    {{ form.as_p }}
+                    {% csrf_token %}
+                    <input type="submit" value="Enviar">
+                </form>
+            {% else %}
+                <h2>Lista de Deportes</h2>
+                <a href="deportes/add">Añadir</a>
+
+                <ul>
+                    {% for d in ActividadesDeportes %}
+
+                        <li>
+                            {{ d.nombre }}
+                            <p>
+                                {{ d.descripcion }}
+                            </p>
+                        </li>
+
+                    {% endfor %}
+                </ul>
+
+            {% endif %}
+        {% endblock %}
+    </body>
+</html>
